@@ -1,0 +1,24 @@
+<%= @event.title %>
+<%= @event.description %>
+<%= @event.date %>
+
+<% if @event.creator_id === current_user.id %>
+<p>Invite a friend!</p>
+  <%= form_for(:invite, url: invites_path) do |f| %>
+
+    <%= f.label :email %>
+    <%= f.email_field :email, class: 'form-control' %>
+    <%= hidden_field_tag :event, @event.id %>
+
+    <%= f.submit "Invite", class: "btn btn-primary" %>
+  <% end %>
+<% end %>
+
+<p class="text-center"> Attendance List </p>
+<% if !@attendees.empty? %>
+<ul class="list-group">
+  <% @attendees.each do |attendee| %>
+    <li class="list-group-item text-center"><%= attendee.name %> (<%= attendee.email %>)</li>
+  <% end %>
+</ul>
+<% end %>

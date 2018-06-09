@@ -1,0 +1,9 @@
+<h1>Invitation for <%=@event.title%>!</h1>
+
+<p>Click the Accept Link below to Accept the Invitation</p>
+
+<%= link_to "Accept", invite_accept_url(@invite.invite_code) %>
+
+<p>Click the Accept Link below to Accept the Invitation</p>
+
+<%= link_to "Deny", invite_reject_url(@invite.invite_code) %>
