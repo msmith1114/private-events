@@ -3,6 +3,7 @@
     <h1 class="text-center">Past Events</h1>
     <% @prev_events.each do |event| %>
     <div class="card border-warning">
+      <%= image_tag event.event_photo_url, class:"card-img-top" if event.event_photo?%>
       <div class="card-body">
         <h5 class="card-title"><%=event.title%></h5>
         <h6 class="card-subtitle mb-2 text-muted"><%=event.date.strftime("%m/%d/%Y")%></h6>
@@ -10,7 +11,7 @@
         <%= link_to "See Event", event_path(event) %>
       </div>
       <div class="card-footer">
-        <small class="text-muted"><%=pluralize(event.attendees.count,'Person')%>  Attended</small>
+        <small class="text-muted"><%=pluralize(event.attendance_count,'Person')%>  Attended</small>
       </div>
     </div>
     <% end %>
@@ -19,6 +20,7 @@
     <h1 class="text-center">Futures Events</h1>
     <% @upcoming_events.each do |event| %>
     <div class="card border-primary">
+      <%= image_tag event.event_photo_url, class:"card-img-top" if event.event_photo?%>
       <div class="card-body">
         <h5 class="card-title"><%=event.title%></h5>
         <h6 class="card-subtitle mb-2 text-muted"><%=event.date.strftime("%m/%d/%Y")%></h6>
@@ -26,7 +28,7 @@
         <%= link_to "See Event", event_path(event) %>
       </div>
       <div class="card-footer">
-        <small class="text-muted"><%=pluralize(event.attendees.count,'Person')%>  Attending</small>
+        <small class="text-muted"><%=pluralize(event.attendance_count,'Person')%>  Attending</small>
       </div>
     </div>
     <% end %>

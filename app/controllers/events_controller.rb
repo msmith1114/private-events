@@ -7,8 +7,8 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
-    @invites = Invite.where({attended_event_id: @event.id, invite_status: 'Accepted'})
-    @attendees = User.where(id: @invites.pluck(:attendee_id))
+    @event_users = @event.invites.where(invite_status: 'Accepted').pluck(:attendee_id)
+    @attendees = User.where(id: @event_users)
   end
 
   def new
@@ -26,7 +26,7 @@ class EventsController < ApplicationController
 
 
   def event_params
-    params.require(:event).permit(:title, :description, :date)
+    params.require(:event).permit(:title, :description, :date, :event_photo)
   end
 
 

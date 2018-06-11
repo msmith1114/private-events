@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       flash[:success] = "You have successfully logged in"
       redirect_to user
     else
-      flash[:warning] = "Login failure"
+      flash[:warning] = "Failed to Log In, check username or password"
       redirect_to login_path
     end
   end

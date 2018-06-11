@@ -20,6 +20,9 @@ gem 'mini_magick',             '4.7.0'
 gem 'will_paginate-bootstrap'
 gem 'bootstrap', '~> 4.1.1'
 gem 'jquery-rails'
+# Image Storage and Manipulation
+gem 'carrierwave',             '1.2.2'
+gem 'mini_magick',             '4.7.0'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
