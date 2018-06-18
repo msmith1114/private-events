@@ -5,14 +5,26 @@ class InvitesController < ApplicationController
   def create
     attendee = User.find_by(email: params[:invite][:email])
     @event = Event.find(params[:event])
-    @invite = @event.invites.build(attendee_id: attendee.id )
-    if @invite.save
-      InviteMailer.invite_pending(attendee,@invite).deliver_now
-      flash[:success] = "#{attendee.name} successfully invited!"
-      redirect_to events_path
-    else
-      redirect_to @event
-    end
+          if !attendee.nil?
+            match = Invite.where(attendee_id: attendee.id, attended_event_id: @event.id)
+            if match.pluck(:invite_status).any? {|status| ["Accepted","Invited"].include?(status)}
+              flash[:info] = "#{attendee.name} already invited..."
+              redirect_to @event
+            else
+              @invite = @event.invites.build(attendee_id: attendee.id )
+              if @invite.save
+                InviteMailer.invite_pending(attendee,@invite).deliver_now
+                @invite.update_attributes(invite_status: 'Invited')
+                flash[:success] = "#{attendee.name} successfully invited!"
+                redirect_to @event
+              else
+                redirect_to @event
+              end
+            end
+          else
+            flash[:warning] = "Email not found..."
+            redirect_to @event
+          end
   end
 
   def accept

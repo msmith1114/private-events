@@ -1,23 +1,35 @@
-<%= @event.title %>
-<%= @event.description %>
-<%= @event.date %>
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <h1>
+      <%= @event.title %>
+    </h1>
+    <%= image_tag @event.event_photo_url, class:"img-fluid rounded" if @event.event_photo?%>
+    <p>
+      <%= @event.description %>
+    </p>
+    <p>
+      <%= @event.date %>
+    </p>
 
-<% if @event.creator_id === current_user.id %>
-<p>Invite a friend!</p>
-  <%= form_for(:invite, url: invites_path) do |f| %>
-
-    <%= f.label :email %>
-    <%= f.email_field :email, class: 'form-control' %>
-    <%= hidden_field_tag :event, @event.id %>
-
-    <%= f.submit "Invite", class: "btn btn-primary" %>
-  <% end %>
-<% end %>
-<p class="text-center"> Attendance List </p>
-<% if !@attendees.empty? %>
-<ul class="list-group">
-  <% @attendees.each do |attendee| %>
-    <li class="list-group-item text-center"><%= attendee.name %> (<%= attendee.email %>)</li>
-  <% end %>
-</ul>
-<% end %>
+    <% if @event.creator_id === current_user.id %>
+    <hr>
+      <div>
+        <p class="text-center">Invite a friend!</p>
+          <%= form_for(:invite, url: invites_path) do |f| %>
+            <%= f.label :email %>
+            <%= f.email_field :email, class: 'form-control' %>
+            <%= hidden_field_tag :event, @event.id %>
+            <%= f.submit "Invite", class: "btn btn-primary" %>
+          <% end %>
+        <p class="text-center"> Attendance List </p>
+        <% if !@attendees.empty? %>
+        <ul class="list-group">
+          <% @attendees.each do |attendee| %>
+            <li class="list-group-item text-center"><%= attendee.name %> (<%= attendee.email %>)</li>
+          <% end %>
+        </ul>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

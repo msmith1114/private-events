@@ -3,7 +3,7 @@
     <h1 class="text-center">Past Events</h1>
     <% @events.past.each do |event| %>
     <div class="card border-warning">
-        <%= image_tag event.event_photo_url, class:"card-img-top" if event.event_photo?%>
+        <%= image_tag event.event_photo_url, class:"card-img-top" if event.event_photo? %>
         <div class="card-body">
         <h5 class="card-title"><%=event.title%></h5>
         <h6 class="card-subtitle mb-2 text-muted"><%=event.date.strftime("%m/%d/%Y")%></h6>

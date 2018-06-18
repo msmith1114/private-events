@@ -2,7 +2,9 @@ class EventPhotoUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
-  process resize_to_limit: [400, 400]
+  process resize_to_limit: [800, 800]
+
+
 
   # Choose what kind of storage to use for this uploader:
   storage :file
