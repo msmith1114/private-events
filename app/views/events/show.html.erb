@@ -5,7 +5,7 @@
     </h1>
     <%= image_tag @event.event_photo_url, class:"img-fluid rounded" if @event.event_photo?%>
     <p>
-      <%= @event.description %>
+      <%= simple_format(@event.description) %>
     </p>
     <p>
       <%= @event.date %>
