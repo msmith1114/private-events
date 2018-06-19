@@ -1,5 +1,5 @@
 class InviteMailer < ApplicationMailer
-  default from: 'notifications@private-events.com'
+  default from: 'smith.matt1114@gmail.com'
 
   def invite_pending(user,invite)
      @user = user
